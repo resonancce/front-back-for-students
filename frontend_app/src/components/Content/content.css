@@ -1,0 +1,26 @@
+
+.emailForm {
+    padding: 4%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.emailField {
+    width: 100%;
+    max-width: 350px;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 8px;
+    margin-bottom: 20px;
+}
+
+.signInButton {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border-color: black;
+
+    cursor: pointer;
+}
