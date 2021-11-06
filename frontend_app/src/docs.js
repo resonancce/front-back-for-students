@@ -35,3 +35,9 @@ console.log('Как узнать длину массива', array.length)
 function sum(a, b) {
     return a + b;
 }
+
+
+// JSON.stringify - преобразование к строке (формат JSON)
+// JSON.parse - обратное преобразование
+
+// setTimeout - отложенный запуск функции , первый параметр колбек, второй время в мс
