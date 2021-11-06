@@ -21,6 +21,32 @@
     height: 40px;
     border-radius: 10px;
     border-color: black;
-
     cursor: pointer;
+}
+
+.authContainer {
+    padding: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoutButton {
+    width: 150px;
+    height: 30px;
+    margin: 4%;
+}
+
+.news {
+    background-color: #8acadb;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+.news_title {
+    text-align: center;
+    margin: 8px;
+    font-size: 30px;
+    font-weight: bold;
 }

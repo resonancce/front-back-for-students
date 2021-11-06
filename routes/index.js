@@ -2,22 +2,23 @@ const express = require('express');
 const router = express.Router();
 
 /* GET home page. */
-const post_1 =  {
+const news_1 = {
   id: 1,
-  name: 'Новость про спорт',
-  text: 'Инмормация про пост'
+  articleName: "Новость 1",
+  text: "Контент новости Контент новости2 ",
 }
-const post_2 =  {
-  id: 2,
-  name: 'Новость про спорт',
-  text: 'Инмормация про пост'
-}
-const posts = [
-  post_1, post_2
-]
 
-router.get('/', function(req, res, next) {
-  res.send({ title: 'title'});
+const news_2 = {
+  id: 2,
+  articleName: "Новость 2",
+  text: "Контент новости 2 Контент новости 2 Контент новости 2",
+}
+
+const arrayNews = [news_1, news_2];
+
+
+router.get('/news', function(req, res, next) {
+  res.send({ arrayNews: arrayNews });
 });
 
 module.exports = router;

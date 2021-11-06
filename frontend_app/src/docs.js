@@ -24,6 +24,13 @@ const user = {
 const array = [user, user, user];
 console.log('Как узнать длину массива', array.length)
 
+// Перебрать массив  - метод map
+// Пример
+// const numberArray = [1,2,3]
+// numberArray.map((item) => item * 12)
+
+// на выходе  [12, 24, 36]
+
 // функция
 function sum(a, b) {
     return a + b;
