@@ -1,4 +1,36 @@
 
 .profileContainer {
     padding: 2%;
+    display: flex;
+}
+
+.profileAvatar {
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.profileFields {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileText {
+    max-width: 300px;
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.profileInfoContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.profileInfoContainer p {
+    font-size: 19px;
 }
