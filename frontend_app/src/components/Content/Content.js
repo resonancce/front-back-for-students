@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
 
 import Loader from '../Loader/Loader'
 
@@ -113,6 +114,8 @@ const Content = () => {
                     </div>
                 </div>
             )}
+            <Button variant="text">Text</Button>
+            <Button variant="contained">Contained</Button>
             {isAuth && (
                 <div className="authContainer">
                     {isLoadingNews && <Loader />}
