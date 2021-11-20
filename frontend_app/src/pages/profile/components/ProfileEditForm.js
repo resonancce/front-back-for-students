@@ -1,10 +1,16 @@
-import React, {useState} from "react";
-import { TextField } from "@mui/material";
+import React, { useState } from "react";
+import { TextField, Button } from "@mui/material";
+import { useDispatch  } from "react-redux";
+
 
 import '../profile.css'
+import {profileMode} from "../constants";
+import {editUserFiled} from "../../../store/actions/userActions";
 
 
-const ProfileEditForm = () => {
+const ProfileEditForm = ({ onEditSwitch }) => {
+    const dispatch = useDispatch()
+
     const [email, setEmailText] = useState('');
     const [date, setDate] = useState('');
     const [profileInfoText, setInfo] = useState('');
@@ -12,6 +18,10 @@ const ProfileEditForm = () => {
 
     const onChangeEmail = (e) => {
         setEmailText(e.target.value)
+
+        dispatch(editUserFiled({
+            email: e.target.value
+        }))
     }
 
     const onChangeDate = (e) => {
@@ -26,7 +36,15 @@ const ProfileEditForm = () => {
         setNumber(e.target.value)
     }
 
-    console.info('number', number)
+    const onSaveProfileInfo = (e) => {
+        // валидация полей юзера
+        // логика запроса
+
+        const user = {}
+        dispatch(editUserFiled(user))
+        onEditSwitch(profileMode.profileInfo)
+    }
+
     return (
         <div className="profileFields">
             <TextField
@@ -70,6 +88,16 @@ const ProfileEditForm = () => {
                     marginBottom: 20
                 }}
             />
+            <Button
+                variant="contained"
+                onClick={onSaveProfileInfo}
+                style={{
+                    width: '100%',
+                    maxWidth: 300
+                }}
+            >
+                Save
+            </Button>
         </div>
     )
 }

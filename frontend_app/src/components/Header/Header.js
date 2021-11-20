@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom'
+
 import logo from "../../logo.svg";
+
 import './header.css'
 
 const Header = () => {
@@ -10,6 +13,20 @@ const Header = () => {
                 className="App-logo"
                 alt="logo"
             />
+            <div className="headerLinkContainer">
+                <Link
+                    className="headerLink"
+                    to="/registration"
+                >
+                    Registration
+                </Link>
+                <Link
+                    className="headerLink"
+                    to="/profile"
+                >
+                    Profile
+                </Link>
+            </div>
         </header>
     )
 }
