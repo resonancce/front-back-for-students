@@ -6,13 +6,13 @@ import { EDIT_USER_FIELDS } from './contants/userConstants'
 
 const INITIAL_STATE_USER = {
     user: {
-        token: getUserToken(),
+        token: 'token' || getUserToken(),
         userName: '',
         number: '',
         email: '',
         date: '',
         userInfo: '',
-        slils: []
+        skills: []
     }
 }
 function rootReducer(state = INITIAL_STATE_USER, action) {

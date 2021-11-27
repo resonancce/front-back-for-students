@@ -1,27 +1,37 @@
 import React from 'react';
 import {
     BrowserRouter as Router,
-    Routes,
-    Route
+    Switch,
+    Route,
 } from "react-router-dom";
 import { Provider } from 'react-redux'
 
 import RegistrationContainer from "./pages/registration/RegistrationContainer";
 import ProfileContainer from "./pages/profile/ProfileContainer";
+import MainPageContainer from "./pages/main/MainPageContainer";
+import NotFoundPageContainer from "./pages/notFoundPage/NotFoundPageContainer";
+
 import Header from './components/Header/Header'
-import Content from './components/Content/Content'
 import { store } from "./store/rootStore";
 
 import './App.css';
 
 const routes = [
     {
+        path: "/",
+        render: () => <MainPageContainer />
+    },
+    {
         path: "/registration",
-        element: <RegistrationContainer />
+        render: () => <RegistrationContainer />
     },
     {
         path: "/profile",
-        element: <ProfileContainer />
+        render: () => <ProfileContainer />
+    },
+    {
+        path: '*',
+        render: () => <NotFoundPageContainer/>
     }
 ]
 
@@ -31,17 +41,17 @@ export default function App() {
           <div>
               <Router>
                   <Header />
-                  <Routes>
+                  <Switch>
                       {routes.map((item) =>(
                           <Route
+                              exact
                               key={item.path}
                               path={item.path}
-                              element={item.element}
+                              render={item.render}
                           />
                       ))}
-                  </Routes>
+                  </Switch>
               </Router>
-              {/*<Content />*/}
           </div>
       </Provider>
   );

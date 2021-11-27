@@ -1,32 +1,33 @@
 import React from "react";
-
 import '../profile.css'
 
-const demoUser = {
-    login: "Test",
-    mail: "test@mail.ru",
-    number: "+7 999 99 99 99",
-    info: "test info",
-    skills: ['css', 'html', 'git']
-}
-
-const ProfileInfo = () => {
-
+const ProfileInfo = ({ user }) => {
+    const {
+        userName,
+        email,
+        number,
+        skills = []
+    } = user
 
     return (
         <div className="profileInfoContainer">
             <h1>
-                {demoUser.login}
+                {userName}
             </h1>
             <p>
-                {demoUser.mail}
+                {email}
             </p>
             <p>
-                {demoUser.number}
+                {number}
             </p>
-            <p>
-                {demoUser.info}
-            </p>
+            <div>
+                <p>Ваши скилы</p>
+                {skills?.length !== 0 ? skills.map((skill) => (
+                    <ul key={skill}>
+                        <li>{skill}</li>
+                    </ul>
+                )) : (<span>у вас пока нет скилов</span>)}
+            </div>
         </div>
     )
 }

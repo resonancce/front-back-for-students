@@ -2,6 +2,7 @@
 .profileContainer {
     padding: 2%;
     display: flex;
+    justify-content: center;
 }
 
 .profileAvatar {
