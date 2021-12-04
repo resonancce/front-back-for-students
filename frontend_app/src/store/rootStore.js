@@ -6,7 +6,7 @@ import { EDIT_USER_FIELDS } from './contants/userConstants'
 
 const INITIAL_STATE_USER = {
     user: {
-        token: 'token' || getUserToken(),
+        token: getUserToken(),
         userName: '',
         number: '',
         email: '',

@@ -2,11 +2,13 @@ import React from 'react'
 import { useSelector } from "react-redux";
 import JobsContainer from "./components/JobsContainer";
 
+import './mainPage.css'
+
 const MainPageContainer = () => {
     const { token, userName } = useSelector((state) => state.user)
 
     return (
-        <div>
+        <div className="mainContainer">
             <h1>
                 Hello
                 {userName ? `, ${userName}` : ''}
