@@ -28,7 +28,6 @@ const ProfileContainer = () => {
     )
     const dispatch = useDispatch()
 
-    const { token } = useSelector((state) => state.user)
     const onEditSwitch = (mode) => {
         setViewMode(mode)
     }
@@ -45,9 +44,6 @@ const ProfileContainer = () => {
 
     return (
         <div className="profileContainer">
-            {!token && (
-                <Redirect to="/" />
-            )}
             {isLoading ? <CircularProgress className="profileLoader"/> : (
                 <>
                     <div>

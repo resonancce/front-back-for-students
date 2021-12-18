@@ -39,7 +39,7 @@ module.exports = {
 
             res.send('ok')
         } catch (e) {
-            res.send(createError(500))
+            res.status(e.status || 500).send(e)
         }
 
     }

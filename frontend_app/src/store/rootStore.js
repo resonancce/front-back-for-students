@@ -2,7 +2,7 @@ import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { getUserToken } from './helper'
-import { EDIT_USER_FIELDS } from './contants/userConstants'
+import { EDIT_USER_FIELDS } from './constants/userConstants'
 
 const INITIAL_STATE_USER = {
     user: {
@@ -29,6 +29,6 @@ function rootReducer(state = INITIAL_STATE_USER, action) {
             return state
     }
 }
-const composedEnhancers = composeWithDevTools(...[])
+const composedEnhancers = composeWithDevTools()
 
 export const store = createStore(rootReducer, INITIAL_STATE_USER, composedEnhancers)

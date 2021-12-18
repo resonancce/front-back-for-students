@@ -10,7 +10,7 @@ import {
     image_demo_url,
     keyUserData,
     news_url
-} from '../../utils/constant'
+} from '../../utils/constants'
 
 const user = {
     name: 'user1',

@@ -1,4 +1,4 @@
-import { EDIT_USER_FIELDS } from "../contants/userConstants";
+import { EDIT_USER_FIELDS } from "../constants/userConstants";
 
 
 export const editUserFiled = (value) => ({

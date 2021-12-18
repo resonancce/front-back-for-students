@@ -11,6 +11,7 @@ import ProfileContainer from "./pages/profile/ProfileContainer";
 import MainPageContainer from "./pages/main/MainPageContainer";
 import NotFoundPageContainer from "./pages/notFoundPage/NotFoundPageContainer";
 import LoginContainer from "./pages/login/LoginContainer";
+import WithRedirectAuthHoc from "./hocs/WithRedirectAuthHoc";
 
 import Header from './components/Header/Header'
 import { store } from "./store/rootStore";
@@ -28,7 +29,11 @@ const routes = [
     },
     {
         path: "/profile",
-        render: () => <ProfileContainer />
+        render: () => (
+            <WithRedirectAuthHoc>
+                <ProfileContainer />
+            </WithRedirectAuthHoc>
+        )
     },
     {
         path: "/login",
