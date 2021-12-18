@@ -12,7 +12,7 @@ module.exports = {
             } = req.body
 
             if (!email || !password) {
-                res.send(createError(400))
+                throw createError(400)
             }
 
             const user = await User.findOne({
@@ -20,7 +20,7 @@ module.exports = {
             }).exec()
 
             if (user) {
-                res.send(400, createError(400, 'user already exist'))
+                throw createError(400, 'user already exist')
             }
 
             const hashPassword = await createHash(password)
@@ -32,7 +32,7 @@ module.exports = {
             const errorUser = newUser.validateSync()
 
             if (errorUser) {
-                res.send(createError(400, errorUser))
+                createError(400, errorUser)
             }
 
             newUser.save()

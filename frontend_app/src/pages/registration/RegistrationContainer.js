@@ -80,7 +80,9 @@ const RegistrationContainer = () => {
                         history.push('/login')
                     }, 2000)
                 })
-                .catch((e) => setUserMessage('User already exist'))
+                .catch((e) => {
+                    setUserMessage(e?.response?.data?.message)
+                })
                 .finally(() => {
                     setIsLoadingSignUp(false)
                 })
@@ -162,7 +164,7 @@ const RegistrationContainer = () => {
             </div>
 
 
-            <h2>
+            <h2 style={{ color: 'red'}}>
                 {userMessage}
             </h2>
         </div>

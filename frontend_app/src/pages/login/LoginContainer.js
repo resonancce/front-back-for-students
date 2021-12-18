@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
-import { Button, TextField } from "@mui/material";
+import { useDispatch } from "react-redux";
+import {Button, CircularProgress, TextField} from "@mui/material";
 import { axiosInstance } from "../../api/axiosInstance";
 
 import './login.css'
+import {setUserToken} from "../../utils/userToken";
+import {editUserFiled} from "../../store/actions/userActions";
 
 const LoginContainer = () => {
+    const dispatch = useDispatch()
+
+    const [isLoadingAuth, setIsLoadingAuth] = useState(false)
+
     const [dataUser, setDataUser] = useState({
         email: '',
         password: ''
@@ -20,10 +27,16 @@ const LoginContainer = () => {
     }
 
     const onSignIn = () => {
-
-        axiosInstance('/login', {
+        setIsLoadingAuth(true)
+        axiosInstance('/auth', {
+            method: 'post',
             data: JSON.stringify(dataUser)
+        }).then((res) => {
+            setUserToken(res?.data.token)
+            dispatch(editUserFiled(res?.data))
         })
+          .catch((e) => console.info(e.response))
+          .finally(() => setIsLoadingAuth(false))
     }
 
     return (
@@ -66,6 +79,7 @@ const LoginContainer = () => {
             >
                 Login
             </Button>
+            {isLoadingAuth && <CircularProgress className="profileLoader"/> }
         </div>
     )
 }

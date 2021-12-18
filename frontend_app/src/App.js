@@ -12,7 +12,7 @@ import MainPageContainer from "./pages/main/MainPageContainer";
 import NotFoundPageContainer from "./pages/notFoundPage/NotFoundPageContainer";
 import LoginContainer from "./pages/login/LoginContainer";
 import WithRedirectAuthHoc from "./hocs/WithRedirectAuthHoc";
-
+import WithRedirectNoAuthHoc from "./hocs/WithRedirectNoAuthHoc";
 import Header from './components/Header/Header'
 import { store } from "./store/rootStore";
 
@@ -25,7 +25,11 @@ const routes = [
     },
     {
         path: "/registration",
-        render: () => <RegistrationContainer />
+        render: () => (
+            <WithRedirectNoAuthHoc>
+                <RegistrationContainer />
+            </WithRedirectNoAuthHoc>
+        )
     },
     {
         path: "/profile",
@@ -37,7 +41,11 @@ const routes = [
     },
     {
         path: "/login",
-        render: () => <LoginContainer />
+        render: () => (
+            <WithRedirectNoAuthHoc>
+                <LoginContainer />
+            </WithRedirectNoAuthHoc>
+        )
     },
     {
         path: '*',

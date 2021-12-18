@@ -33,14 +33,13 @@ const ProfileContainer = () => {
     }
 
 
-    useEffect(() => {
-        setIsLoading(true)
-
-        setTimeout(() => {
-            dispatch(editUserFiled(demoUserTest))
-            setIsLoading(false)
-        }, 2000)
-    },[])
+    // useEffect(() => {
+    //     setIsLoading(true)
+    //
+    //     setTimeout(() => {
+    //         setIsLoading(false)
+    //     }, 2000)
+    // },[])
 
     return (
         <div className="profileContainer">

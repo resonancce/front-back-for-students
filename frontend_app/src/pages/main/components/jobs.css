@@ -28,7 +28,7 @@
 }
 
 .jobImage {
-    width: 80px;
+    width: 50px;
     height: 50px;
     border-radius: 20px;
     margin-left: 2%;
@@ -51,6 +51,8 @@
 
 .jobSkillContainer {
     display: flex;
+    flex-wrap: wrap;
+    min-width: 300px;
 }
 .jobSkillItem {
     font-size: 20px;
@@ -59,4 +61,15 @@
     border-radius: 20px;
     padding: 1% 2%;
     border: 1px solid #00B7FF;
+}
+
+.vacanciesContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.vacanciesContainer div {
+    margin: 2%;
 }
