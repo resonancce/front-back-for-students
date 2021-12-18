@@ -30,7 +30,14 @@ const Header = () => {
                             Registration
                         </Link>
                     )}
-
+                    {!token && (
+                        <Link
+                            className="headerLink"
+                            to="/login"
+                        >
+                            Login
+                        </Link>
+                    )}
                     {token && (
                         <Link
                             className="headerLink"

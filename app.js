@@ -4,16 +4,22 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors')
+const passport = require('passport');
+
+const LocalStrategy = require('passport-local').Strategy;
 
 const posts = require('./routes/posts/index');
 const vacancy = require('./routes/vacancy/vacancy');
 const registration = require('./routes/registration/registration');
+const User = require('./db/models/user')
 
 
 require('./db/connectDB')
 
 const app = express();
 
+require('./passport')(passport)
+app.use(passport.initialize());
 app.use(cors({}))
 app.use(logger('dev'));
 app.use(express.json());

@@ -10,6 +10,7 @@ import RegistrationContainer from "./pages/registration/RegistrationContainer";
 import ProfileContainer from "./pages/profile/ProfileContainer";
 import MainPageContainer from "./pages/main/MainPageContainer";
 import NotFoundPageContainer from "./pages/notFoundPage/NotFoundPageContainer";
+import LoginContainer from "./pages/login/LoginContainer";
 
 import Header from './components/Header/Header'
 import { store } from "./store/rootStore";
@@ -28,6 +29,10 @@ const routes = [
     {
         path: "/profile",
         render: () => <ProfileContainer />
+    },
+    {
+        path: "/login",
+        render: () => <LoginContainer />
     },
     {
         path: '*',

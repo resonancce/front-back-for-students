@@ -1,41 +1,45 @@
 import React, { useState } from 'react'
-import { TextField, Button } from '@mui/material'
+import { TextField, Button, CircularProgress } from '@mui/material'
+import { useHistory } from 'react-router-dom'
 
-import {emailRegular, errorPasswordValidate} from "./constants";
+import { axiosInstance } from "../../api/axiosInstance";
+
+import { emailRegular, errorPasswordValidate } from "./constants";
 
 import './registration.css'
 
 const RegistrationContainer = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [repeatPassword, setRepeatPassword] = useState('')
+    const history = useHistory()
+    const [dataUser, setDataUser] = useState({
+        email: '',
+        password: '',
+        repeatPassword: ''
+    })
 
     const [isValidateErrorEmail, setValidateErrorEmail] = useState(false)
     const [validatePasswordError, setValidatePassword] = useState('')
     const [repeatPasswordError, setRepeatPasswordError] = useState('')
+    const [userMessage, setUserMessage] = useState('')
 
-    const onChangeEmail = (e) => {
-        const { value } = e.target
+    const [isLoadingSignUp, setIsLoadingSignUp] = useState(false)
 
-        if (isValidateErrorEmail) {
-            setValidateErrorEmail(false)
+    const onChangeUserField = (e) => {
+        const { value, name } = e.target
+
+        if (name === 'email') {
+            if (isValidateErrorEmail) {
+                setValidateErrorEmail(false)
+            }
         }
 
-        setEmail(value)
-    }
-
-    const onChangePassword = (e) => {
-        const { value } = e.target
-        setPassword(value)
-    }
-
-    const onChangeRepeat = (e) => {
-        const { value } = e.target
-        setRepeatPassword(value)
+        setDataUser((prevState) => ({
+            ...prevState,
+            [name]: value
+        }))
     }
 
     const onValidatePassword = () => {
-        if (password.length < 6) {
+        if (dataUser.password.length < 6) {
             setValidatePassword(errorPasswordValidate.lengthError)
         } else {
             if (repeatPasswordError) setValidatePassword('')
@@ -45,7 +49,7 @@ const RegistrationContainer = () => {
     }
 
     const onValidateRepeat = () => {
-        if (repeatPassword !== password) {
+        if (dataUser.repeatPassword !== dataUser.password) {
             setRepeatPasswordError(errorPasswordValidate.repeatError)
         } else {
             setRepeatPasswordError('')
@@ -53,34 +57,44 @@ const RegistrationContainer = () => {
     }
 
     const onValidateEmail = () => {
-        setValidateErrorEmail(!emailRegular.test(email.toLowerCase()))
-
+        setValidateErrorEmail(!emailRegular.test(dataUser.email.toLowerCase()))
     }
+
     const onSignUp = () => {
 
-        const dataUser = JSON.stringify({
-            email,
-            password
+        setIsLoadingSignUp(true)
+        const data = JSON.stringify({
+            email: dataUser.email,
+            password: dataUser.password
         })
 
-        fetch('http://localhost:5001/sign-up', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: dataUser
-        })
-            .then((res) => console.log(res))
-            .catch((e) => console.info(e))
+        setTimeout(() => {
+            axiosInstance('/sign-up', {
+                method: 'post',
+                data: data
+            })
+                .then((res) => {
+                    setUserMessage('Вы успешно зарегистрировались, ' +
+                        'вы будете перенаправлены на логин')
+                    setTimeout(() => {
+                        history.push('/login')
+                    }, 2000)
+                })
+                .catch((e) => setUserMessage('User already exist'))
+                .finally(() => {
+                    setIsLoadingSignUp(false)
+                })
+        }, 1000)
     }
 
     const isDisabledSignUp =
-        email.length < 6
+        dataUser.email.length < 6
         || isValidateErrorEmail
         || validatePasswordError
         || repeatPasswordError
-        || password.length < 6
-        || repeatPassword.length < 6
+        || dataUser.password.length < 6
+        || dataUser.repeatPassword.length < 6
+        || isLoadingSignUp
 
     return (
         <div className="registrationContainer">
@@ -91,10 +105,11 @@ const RegistrationContainer = () => {
                 className="profileText"
                 type="text"
                 label="email"
+                name="email"
                 placeholder="email"
-                onChange={onChangeEmail}
+                onChange={onChangeUserField}
                 onBlur={onValidateEmail}
-                value={email}
+                value={dataUser.email}
                 style={{
                     marginBottom: 20
                 }}
@@ -107,13 +122,14 @@ const RegistrationContainer = () => {
                 type="password"
                 label="password"
                 placeholder="password"
-                onChange={onChangePassword}
+                name="password"
+                onChange={onChangeUserField}
                 onBlur={onValidatePassword}
-                value={password}
+                value={dataUser.password}
                 style={{
                     marginBottom: 20
                 }}
-                error={validatePasswordError}
+                error={!!validatePasswordError}
                 helperText={validatePasswordError || ""}
             />
             <TextField
@@ -121,23 +137,34 @@ const RegistrationContainer = () => {
                 type="password"
                 label="repeat password"
                 placeholder="repeat password"
-                onChange={onChangeRepeat}
+                name="repeatPassword"
+                onChange={onChangeUserField}
                 onBlur={onValidateRepeat}
-                value={repeatPassword}
+                value={dataUser.repeatPassword}
                 style={{
                     marginBottom: 20
                 }}
-                error={repeatPasswordError}
+                error={!!repeatPasswordError}
                 helperText={repeatPasswordError || ""}
             />
             <Button
                 variant="contained"
                 onClick={onSignUp}
-                disabled={isDisabledSignUp}
+                disabled={!!isDisabledSignUp}
             >
                 Sign up
             </Button>
+            <div style={{
+                height: 40,
+                padding: '2%'
+            }}>
+                {isLoadingSignUp && <CircularProgress />}
+            </div>
 
+
+            <h2>
+                {userMessage}
+            </h2>
         </div>
     )
 }
