@@ -1,0 +1,75 @@
+.jobsContainer {
+    padding: 2%;
+
+}
+
+.jobItem {
+    width: 100%;
+    max-width: 500px;
+    min-height: 300px;
+    background-color: #009688;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 1% 2%;
+}
+
+.jobItem h2 {
+    color: white;
+}
+
+.jobTitleContainer {
+    display: flex;
+    align-items: center;
+}
+.jobTitle {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.jobImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    margin-left: 2%;
+}
+
+.jobDateContainer {
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-left: 12%;
+}
+
+.jobDateTitle {
+    margin-left: 2%;
+}
+
+.jobContentContainer {
+    color: white;
+}
+
+.jobSkillContainer {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 300px;
+}
+.jobSkillItem {
+    font-size: 20px;
+    margin-left: 2%;
+    max-width: 50px;
+    border-radius: 20px;
+    padding: 1% 2%;
+    border: 1px solid #00B7FF;
+}
+
+.vacanciesContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.vacanciesContainer div {
+    margin: 2%;
+}
