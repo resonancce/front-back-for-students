@@ -77,7 +77,7 @@ const RegistrationContainer = () => {
                     setUserMessage('Вы успешно зарегистрировались, ' +
                         'вы будете перенаправлены на логин')
                     setTimeout(() => {
-                        history.push('/login')
+                        history('/login')
                     }, 2000)
                 })
                 .catch((e) => {

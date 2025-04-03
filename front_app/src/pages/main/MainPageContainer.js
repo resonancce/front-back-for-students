@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import JobsContainer from "./components/JobsContainer";
 
 import './mainPage.css'
+import { CarsContainer } from './components/CarsContainer'
 
 const MainPageContainer = () => {
     const { token, userName } = useSelector((state) => state.user)
@@ -13,11 +14,7 @@ const MainPageContainer = () => {
                 Hello
                 {userName ? `, ${userName}` : ''}
             </h1>
-            {!token && (
-                <h3>Чтобы видеть актуальные вакансии пожалуйста авторизируйтесь</h3>
-            )}
-
-            {!!token && <JobsContainer />}
+          <CarsContainer />
         </div>
     )
 }

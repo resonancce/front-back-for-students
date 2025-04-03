@@ -4,12 +4,12 @@ import { useNavigate } from "react-router";
 
 
 const WithRedirectNoAuthHoc = ({ children }) => {
-    const history = useNavigate()
+    const navigate = useNavigate()
     const token = useSelector((state) => state.user.token)
 
     useEffect(() => {
         if (token) {
-            history.goBack()
+            navigate(-1)
         }
     } , [token])
 

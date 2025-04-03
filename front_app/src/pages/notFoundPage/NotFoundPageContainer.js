@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 const NotFoundPageContainer = () => {
     const [countRedirect, setCountRedirect] = useState(3)
-    const history = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const idInterval = setInterval(() => {
@@ -20,7 +20,7 @@ const NotFoundPageContainer = () => {
 
     useEffect(() => {
         if (countRedirect === 0) {
-            history.push('/')
+            navigate('/')
         }
     },[countRedirect])
 
