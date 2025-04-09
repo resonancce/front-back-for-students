@@ -17,3 +17,12 @@ export const setUserToken = (token) => {
         return ''
     }
 }
+
+export const clearUserToken = () => {
+    try {
+        return localStorage.removeItem(userToken)
+    } catch (e) {
+        console.info('error get user token')
+        return ''
+    }
+}

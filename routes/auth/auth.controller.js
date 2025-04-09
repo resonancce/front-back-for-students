@@ -6,9 +6,9 @@ const createHash = require('../../utils/createHash')
 module.exports = {
     async auth(req, res, next) {
         try {
-            if (!req.user.token) {
-                throw createError(401)
-            }
+            // if (!req.user.token) {
+            //     throw createError(401)
+            // }
             console.info('user', req.user)
 
             res.send(req.user)

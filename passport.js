@@ -16,9 +16,11 @@ module.exports = (passport) => {
             passwordField: 'password'
         },
         function(username, password, done) {
+        console.info('@@---->123123', username, password)
             User.findOne({ email: username }, function(err, userValues) {
-
-                if (err) { return done(err); }
+                if (err) { 
+                    return done(err);
+                }
                 if (!userValues) {
                     return done(null, false, { message: 'Incorrect email.' });
                 }
@@ -34,8 +36,8 @@ module.exports = (passport) => {
 
 
                             const user = {
-                                token: createAccessToken({ email: userValues.email,  skills: userValues.skills }),
-                                skills: userValues.skills,
+                                token: createAccessToken({ email: userValues.email }),
+                                role: userValues.role,
                                 email: userValues.email
                             }
                             return done(null, user);
