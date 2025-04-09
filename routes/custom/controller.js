@@ -1,34 +1,20 @@
 const Car = require("../../db/models/autocar");
 const createError = require("http-errors");
-const createHash = require('../../utils/createHash')
-
-
-const Cars = [
-];
+const User = require("../../db/models/user");
 
 module.exports = {
-
-    async getVacancies(req, res, next) {
-
-        const data = await User.find({ name: 'user'})
-        console.log('data', data[0]._id)
-        res.send({ arrayNews: data[0]._id  });
+    async getUser(req, res, next) {
+        console.info('2222',req.user)
+        const user = await User.find({ email: req.user.email})
+        console.log('data', user[0])
+        res.send({ user: user[0] });
     },
 
     async setCar(req, res, next) {
         try {
-            const car = new Car(
-              {
-                  name: 'A-Class',
-                  brand: 'Mercedes-Benz',
-                  price: 3800,
-                  image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8',
-                  type: 'Хэтчбек',
-                  seats: 5,
-                  transmission: 'Автоматическая',
-                  fuelType: 'Бензин',
-                  available: true,
-              })
+            const { car: carData } = req
+            const car = new Car(carData)
+
 
             const error = car.validateSync()
 

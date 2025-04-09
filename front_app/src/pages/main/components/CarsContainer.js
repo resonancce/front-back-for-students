@@ -6,12 +6,13 @@ import { AdminCarModal } from './components/AdminCarModal';
 import { Car as CarIcon, Plus } from 'lucide-react';
 import { axiosInstance } from '../../../api/axiosInstance'
 import { useDispatch, useSelector } from 'react-redux'
+import { editUserFiled } from '../../../store/actions/userActions'
 
 export const CarsContainer = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [cars, setCars] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
@@ -33,7 +34,13 @@ export const CarsContainer = () => {
   };
 
   const checkAdminStatus =  () => {
-    setIsAdmin(true || user.role === 'admin');
+    axiosInstance('/user', {
+      method: 'get',
+    }).then((res) => {
+      if (res?.data?.user) dispatch(editUserFiled(res?.data.user))
+      setIsAdmin(res?.data.user.role === 'admin')
+    }).catch((err) => console.error('@@---->err', err))
+      .finally(() => setLoading(false))
   };
 
   const handleRent = (car) => {

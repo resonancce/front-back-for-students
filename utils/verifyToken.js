@@ -6,24 +6,24 @@ const resGenerator = require('./resGenerator');
 const verifyToken = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
-        console.info('@@---->token', token)
+
         if (!token) return resGenerator(res, 401, { message: 'Token was missed' });
         // eslint-disable-next-line
-        const { id } = jwt.decode(token);
+        const { email } = jwt.decode(token);
 
         // eslint-disable-next-line
-        if (!id) return resGenerator(res, 400, { message: 'Access denied'});
+        if (!email) return resGenerator(res, 400, { message: 'Access denied'});
 
         const user = await User.findOne({
-            where: { id },
+            where: { email },
         });
 
         if (!user) return resGenerator(res, 401, { message: 'User not found' });
-        return jwt.verify(token, `${process.env.SECRET_KEY}${user.password}`, (err) => {
+        return jwt.verify(token, `${process.env.SECRET_TOKEN}`, (err) => {
             if (err) {
                 return resGenerator(res, 400, { message: 'Invalid token' });
             }
-            req.user = user.dataValues;
+            req.user = user;
             return next();
         });
     }
