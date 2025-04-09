@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from "redux";
+import { createStore } from "redux";
 import { composeWithDevTools } from '@redux-devtools/extension';
 
 import { getUserToken } from '../utils/userToken'
@@ -10,9 +10,10 @@ const INITIAL_STATE_USER = {
         userName: '',
         number: '',
         email: '',
+        role: '',
         date: '',
         userInfo: '',
-        skills: []
+        cars: []
     }
 }
 function rootReducer(state = INITIAL_STATE_USER, action) {
@@ -21,7 +22,7 @@ function rootReducer(state = INITIAL_STATE_USER, action) {
             const user = action.value
             return {
                 ...state,
-                user: { ...state.user, ...user }
+                user: user ? { ...state.user, ...user } : { ...INITIAL_STATE_USER.user, token: null }
             }
         }
 

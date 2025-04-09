@@ -20,11 +20,12 @@ const user = new Schema({
         type: String,
         required: true,
     },
+    role: String,
     userName: String,
     number: String,
     userInfo: String,
-    skills: [{
-        name: String
+    cars: [{
+        id: String
     }]
 }, { timestamps: true });
 const User = mongoose.model('User', user);

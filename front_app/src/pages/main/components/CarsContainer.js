@@ -4,15 +4,18 @@ import { RentalForm } from './components/RentalForm';
 import { BookingModal } from './components/BookingModal';
 import { AdminCarModal } from './components/AdminCarModal';
 import { Car as CarIcon, Plus } from 'lucide-react';
-import {Cars} from './mockData'
+import { axiosInstance } from '../../../api/axiosInstance'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const CarsContainer = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [showAdminModal, setShowAdminModal] = useState(false);
-  const [cars, setCars] = useState(Cars);
+  const [cars, setCars] = useState([]);
   const [isAdmin, setIsAdmin] = useState(true);
   const [loading, setLoading] = useState(true);
-  
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+
   useEffect(() => {
     fetchCars();
     checkAdminStatus();
@@ -20,40 +23,17 @@ export const CarsContainer = () => {
 
   const fetchCars = async () => {
     setLoading(true);
-    try {
-      // const { data, error } = await supabase
-      //   .from('cars')
-      //   .select('*')
-      //   .order('brand', { ascending: true })
-      //   .order('name', { ascending: true });
 
-      // if (error) throw error;
-const data =[]
-      if (data && data.length > 0) {
-        setCars(data.map(car => ({
-          ...car,
-          image: car.image_url // Map the image_url to image for compatibility
-        })));
-      }
-    } catch (error) {
-      console.error('Error fetching cars:', error);
-      // Keep the sample cars if there's an error
-    } finally {
-      setLoading(false);
-    }
+    axiosInstance('/cars', {
+      method: 'get',
+    }).then((res) => {
+      setCars(res?.data?.cars || [])
+    }).catch((err) => console.error('@@---->err', err))
+      .finally(() => setLoading(false))
   };
 
-  const checkAdminStatus = async () => {
-    // const { data: { user } } = await supabase.auth.getUser();
-    // if (user) {
-    //   const { data: profile } = await supabase
-    //     .from('profiles')
-    //     .select('is_admin')
-    //     .eq('id', user.id)
-    //     .single();
-    //
-    //   setIsAdmin(profile?.is_admin || false);
-    // }
+  const checkAdminStatus =  () => {
+    setIsAdmin(true || user.role === 'admin');
   };
 
   const handleRent = (car) => {
@@ -106,7 +86,9 @@ const data =[]
           <h2 className="text-3xl font-bold">Доступные автомобили</h2>
           {isAdmin && (
             <button
-              onClick={() => setShowAdminModal(true)}
+              onClick={() => {
+                setShowAdminModal(true)
+              }}
               className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
             >
               <Plus size={20} />
@@ -120,14 +102,14 @@ const data =[]
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
             <p className="mt-4 text-gray-600">Загрузка автомобилей...</p>
           </div>
-        ) : cars.length === 0 ? (
+        ) : cars?.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-600">Автомобили не найдены</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cars.map((car) => (
-              <CarCard key={car.id} car={car} onRent={handleRent} />
+              <CarCard key={car._id} car={car} onRent={handleRent} />
             ))}
           </div>
         )}

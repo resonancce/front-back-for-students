@@ -4,3 +4,4 @@
 ./frontend_app/node_modules
 ./frontend_app/.DS_Store
 ./.gigaide
+.env

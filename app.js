@@ -7,10 +7,10 @@ const cors = require('cors')
 const passport = require('passport');
 require('dotenv').config()
 
-const LocalStrategy = require('passport-local').Strategy;
+require('passport-local').Strategy;
 
-const posts = require('./routes/posts/index');
-const vacancy = require('./routes/vacancy/vacancy');
+const custom = require('./routes/custom/index');
+const cars = require('./routes/cars/cars');
 const registration = require('./routes/registration/registration');
 const auth = require('./routes/auth/auth')
 
@@ -27,8 +27,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', posts);
-app.use('/vacancy', vacancy)
+app.use('/', custom);
+app.use('/cars', cars)
 app.use('/sign-up', registration)
 app.use('/auth', auth)
 // catch 404 and forward to error handler
