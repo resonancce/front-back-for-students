@@ -10,3 +10,14 @@ export const axiosInstance = axios.create({
     }
 })
 
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+      config.headers["Authorization"] = localStorage.getItem('userToken') || "";
+
+      return config;
+  },
+  (error) => {
+      Promise.reject(error);
+  }
+);

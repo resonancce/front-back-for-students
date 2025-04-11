@@ -16,7 +16,6 @@ module.exports = (passport) => {
             passwordField: 'password'
         },
         function(username, password, done) {
-        console.info('@@---->123123', username, password)
             User.findOne({ email: username }, function(err, userValues) {
                 if (err) { 
                     return done(err);

@@ -8,26 +8,4 @@ module.exports = {
 
         res.send({ user: user[0] });
     },
-
-    async setCar(req, res, next) {
-        try {
-            const { car: carData } = req
-            const car = new Car(carData)
-
-
-            const error = car.validateSync()
-
-            if (error) {
-                res.send(createError(400, error))
-            }
-            car.save()
-
-            res.status(200).send({});
-        } catch (e) {
-            throw createError(404, e)
-        }
-
-
-
-    }
 }

@@ -11,8 +11,9 @@ module.exports = {
     },
 
     async setCar (req, res, next) {
-      const { body } = req
+      const { body, user } = req
 
+      if (user.role !== 'admin') res.send(createError(400, "Only admin can add a car"))
       const currentCar = new AutoCars(body)
 
       const error = currentCar.validateSync()

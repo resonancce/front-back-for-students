@@ -20,9 +20,7 @@ export const CarsContainer = () => {
 
   useEffect(() => {
     fetchCars();
-    setTimeout(() => {
-      checkAdminStatus();
-    }, 300 )
+    checkAdminStatus();
   }, []);
 
   const fetchCars = async () => {
@@ -43,8 +41,8 @@ export const CarsContainer = () => {
       if (res?.data?.user) dispatch(editUserFiled(res?.data.user))
       setIsAdmin(res?.data.user.role === 'admin')
     }).catch(() => {
-      clearUserToken()
-      dispatch(editUserFiled(null))
+      // clearUserToken()
+      // dispatch(editUserFiled(null))
     })
       .finally(() => setLoading(false))
   };
