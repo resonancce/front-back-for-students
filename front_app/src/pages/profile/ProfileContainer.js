@@ -50,17 +50,17 @@ const ProfileContainer = () => {
                             alt="аватар"
                             className="profileAvatar"
                         />
-                        {modeView === profileMode.profileInfo && (
-                            <Button
-                                style={{
-                                    width: 150
-                                }}
-                                variant="contained"
-                                onClick={() => onEditSwitch(profileMode.edit)}
-                            >
-                                Edit profile
-                            </Button>
-                        )}
+                        {/*{modeView === profileMode.profileInfo && (*/}
+                        {/*    <Button*/}
+                        {/*        style={{*/}
+                        {/*            width: 150*/}
+                        {/*        }}*/}
+                        {/*        variant="contained"*/}
+                        {/*        onClick={() => onEditSwitch(profileMode.edit)}*/}
+                        {/*    >*/}
+                        {/*        Edit profile*/}
+                        {/*    </Button>*/}
+                        {/*)}*/}
                     </div>
                     {modeView === profileMode.profileInfo && (
                         <ProfileInfo user={user}/>

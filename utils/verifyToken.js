@@ -8,10 +8,9 @@ const verifyToken = async (req, res, next) => {
         const token = req.headers.authorization;
 
         if (!token) return resGenerator(res, 401, { message: 'Token was missed' });
-        // eslint-disable-next-line
+
         const { email } = jwt.decode(token);
 
-        // eslint-disable-next-line
         if (!email) return resGenerator(res, 400, { message: 'Access denied'});
 
         const user = await User.findOne({

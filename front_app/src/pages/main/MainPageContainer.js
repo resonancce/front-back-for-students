@@ -6,14 +6,8 @@ import './mainPage.css'
 import { CarsContainer } from './components/CarsContainer'
 
 const MainPageContainer = () => {
-    const { token, userName } = useSelector((state) => state.user)
-
     return (
         <div className="mainContainer">
-            <h1>
-                Hello
-                {userName ? `, ${userName}` : ''}
-            </h1>
           <CarsContainer />
         </div>
     )

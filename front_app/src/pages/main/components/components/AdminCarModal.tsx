@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
+import { axiosInstance } from '../../../../api/axiosInstance'
+import { editUserFiled } from '../../../../store/actions/userActions'
 
 interface AdminCarModalProps {
   onClose: () => void;
@@ -12,35 +14,35 @@ export function AdminCarModal({ onClose, onSuccess }: AdminCarModalProps) {
     name: '',
     brand: '',
     price: '',
-    image_url: '',
+    image: '',
     type: '',
     seats: '',
     transmission: 'Автоматическая',
     fuel_type: 'Бензин',
+    available: true
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      // const { error } = await supabase.from('cars').insert([{
-      //   ...form,
-      //   price: parseFloat(form.price),
-      //   seats: parseInt(form.seats, 10),
-      //   available: true
-      // }]);
+      axiosInstance('/car', {
+        method: 'post',
+        data: JSON.stringify({
+          ...form,
+          price: parseFloat(form.price),
+          seats: parseInt(form.seats, 10),
+          available: true
+        }),
+      }).then(() => {
+        setTimeout(onSuccess, 500)
+        onClose();
+      }).catch((error) => {
+        alert('Ошибка при добавлении автомобиля');
+        console.error('Error:', error);
+      })
+        .finally(() => setLoading(false))
 
-      // if (error) throw error;
-      
-      onSuccess();
-      onClose();
-    } catch (error) {
-      alert('Ошибка при добавлении автомобиля');
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
@@ -105,8 +107,8 @@ export function AdminCarModal({ onClose, onSuccess }: AdminCarModalProps) {
                 <input
                   type="url"
                   required
-                  value={form.image_url}
-                  onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+                  value={form.image}
+                  onChange={(e) => setForm({ ...form, image: e.target.value })}
                   className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="https://example.com/image.jpg"
                 />

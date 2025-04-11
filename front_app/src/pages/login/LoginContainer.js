@@ -32,6 +32,7 @@ const LoginContainer = () => {
             method: 'post',
             data: JSON.stringify(dataUser)
         }).then((res) => {
+          console.info('@@---->res', res)
             setUserToken(res?.data.token)
             dispatch(editUserFiled(res?.data))
         })

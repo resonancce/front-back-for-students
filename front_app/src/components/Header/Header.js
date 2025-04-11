@@ -10,7 +10,7 @@ import { editUserFiled } from '../../store/actions/userActions'
 import { clearUserToken } from '../../utils/userToken'
 
 const Header = () => {
-    const { token = null} = useSelector(state => state.user)
+    const { token = null, ...rest} = useSelector(state => state.user)
   const dispatch = useDispatch()
 
   const logout = () => {
@@ -29,14 +29,14 @@ const Header = () => {
 
             <div className="headerMainContainer">
                 <div className="headerLinkContainer">
-                    {!token && (
-                        <Link
-                            className="headerLink"
-                            to="/registration"
-                        >
-                            Registration
-                        </Link>
-                    )}
+                    {/*{!token && (*/}
+                    {/*    <Link*/}
+                    {/*        className="headerLink"*/}
+                    {/*        to="/registration"*/}
+                    {/*    >*/}
+                    {/*        Registration*/}
+                    {/*    </Link>*/}
+                    {/*)}*/}
                     {!token && (
                         <Link
                             className="headerLink"

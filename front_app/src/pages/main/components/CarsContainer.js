@@ -7,6 +7,7 @@ import { Car as CarIcon, Plus } from 'lucide-react';
 import { axiosInstance } from '../../../api/axiosInstance'
 import { useDispatch, useSelector } from 'react-redux'
 import { editUserFiled } from '../../../store/actions/userActions'
+import { clearUserToken } from '../../../utils/userToken'
 
 export const CarsContainer = () => {
   const [selectedCar, setSelectedCar] = useState(null);
@@ -19,13 +20,15 @@ export const CarsContainer = () => {
 
   useEffect(() => {
     fetchCars();
-    checkAdminStatus();
+    setTimeout(() => {
+      checkAdminStatus();
+    }, 300 )
   }, []);
 
   const fetchCars = async () => {
     setLoading(true);
 
-    axiosInstance('/cars', {
+    axiosInstance('/car', {
       method: 'get',
     }).then((res) => {
       setCars(res?.data?.cars || [])
@@ -39,7 +42,10 @@ export const CarsContainer = () => {
     }).then((res) => {
       if (res?.data?.user) dispatch(editUserFiled(res?.data.user))
       setIsAdmin(res?.data.user.role === 'admin')
-    }).catch((err) => console.error('@@---->err', err))
+    }).catch(() => {
+      clearUserToken()
+      dispatch(editUserFiled(null))
+    })
       .finally(() => setLoading(false))
   };
 

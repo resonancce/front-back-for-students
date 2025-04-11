@@ -27,7 +27,8 @@ module.exports = {
 
             const newUser = new User({
                 email: email,
-                password: hashPassword
+                password: hashPassword,
+                role: 'user'
             })
             const errorUser = newUser.validateSync()
 

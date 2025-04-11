@@ -3,10 +3,9 @@ const createError = require("http-errors");
 const User = require("../../db/models/user");
 
 module.exports = {
-    async getUser(req, res, next) {
-        console.info('2222',req.user)
+    async getUser(req, res) {
         const user = await User.find({ email: req.user.email})
-        console.log('data', user[0])
+
         res.send({ user: user[0] });
     },
 

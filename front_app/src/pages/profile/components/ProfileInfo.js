@@ -6,28 +6,18 @@ const ProfileInfo = ({ user }) => {
         userName,
         email,
         number,
+      role,
         skills = []
     } = user
 
     return (
         <div className="profileInfoContainer">
             <h1>
-                {userName}
+                role - {role}
             </h1>
             <p>
-                {email}
+                email - {email}
             </p>
-            <p>
-                {number}
-            </p>
-            <div>
-                <p>Ваши скилы</p>
-                {skills?.length !== 0 ? skills.map((skill) => (
-                    <ul key={skill}>
-                        <li>{skill}</li>
-                    </ul>
-                )) : (<span>у вас пока нет скилов</span>)}
-            </div>
         </div>
     )
 }

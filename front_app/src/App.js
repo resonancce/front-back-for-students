@@ -23,22 +23,22 @@ const routes = [
         path: "/",
         element:  <MainPageContainer />
     },
-    {
-        path: "/registration",
-        element:
-            <WithRedirectNoAuthHoc>
-                <RegistrationContainer />
-            </WithRedirectNoAuthHoc>
-
-    },
     // {
-    //     path: "/profile",
+    //     path: "/registration",
     //     element:
-    //         <WithRedirectAuthHoc>
-    //             <ProfileContainer />
-    //         </WithRedirectAuthHoc>
+    //         <WithRedirectNoAuthHoc>
+    //             <RegistrationContainer />
+    //         </WithRedirectNoAuthHoc>
     //
     // },
+    {
+        path: "/profile",
+        element:
+            <WithRedirectAuthHoc>
+                <ProfileContainer />
+            </WithRedirectAuthHoc>
+
+    },
     {
         path: "/login",
         element:
